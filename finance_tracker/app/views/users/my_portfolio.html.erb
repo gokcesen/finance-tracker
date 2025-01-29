@@ -2,7 +2,7 @@
 
 <div class="search-area">
   <h3>Search Stocks</h3>
-  <%= form_tag search_stock_path, method: :get, data: { turbolinks: false } do %>
+  <%= form_tag search_stock_path, remote: true, method: :get, data: { turbolinks: false } do %>
     <div class="form-group row">
       <div class="col-sm-9">
         <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true, class: "form-control form-control-lg" %>
@@ -14,10 +14,4 @@
   <% end %>
 </div>
 
-<% if @stock %>
-  <div class="card card-header results-block">
-    <strong>Symbol: </strong> <%= @stock.ticker %>
-    <strong>Name: </strong> <%= @stock.name %>
-    <strong>Price: </strong> <%= @stock.last_price %>
-  </div>
-<% end %>
+<%= render 'users/result' %>
