@@ -24,6 +24,7 @@ gem 'devise-bootstrap-views', '~> 1.1'
 gem 'alphavantage'
 
 
+
 #gem 'basic_yahoo_finance', '~> 0.5.1'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]

@@ -1,9 +1,4 @@
 class Stock < ApplicationRecord
-  def refresh_price!
-    data = AlphaVantageService.fetch_stock_data(ticker)
-    update(last_price: data[:last_price])
-  end
-
   require 'net/http'
   require 'json'
 
@@ -14,11 +9,15 @@ class Stock < ApplicationRecord
     uri = URI(url)
     response = Net::HTTP.get(uri)
     result = JSON.parse(response)
-
+  
     if result["Global Quote"].nil? || result["Global Quote"].empty?
       return nil
     else
-      return result["Global Quote"]["05. price"].to_f
+      stock = Stock.new
+      stock.ticker = ticker_symbol
+      stock.name = ticker_symbol # (Alpha Vantage'dan şirket adı da alınabilir, ama burada ticker kullanılıyor)
+      stock.last_price = result["Global Quote"]["05. price"].to_f
+      return stock
     end
   rescue => e
     Rails.logger.error("Error fetching stock data: #{e.message}")
@@ -26,3 +25,5 @@ class Stock < ApplicationRecord
   end
 
 end
+
+
