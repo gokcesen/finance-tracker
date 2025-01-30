@@ -1,5 +1,7 @@
 <h1>My Portfolio</h1>
 
+<%= render 'shared/flash' %> <!-- Render flash messages -->
+
 <div class="search-area">
   <h3>Search Stocks</h3>
   <%= form_tag search_stock_path, remote: true, method: :get, data: { turbolinks: false } do %>
@@ -14,4 +16,6 @@
   <% end %>
 </div>
 
-<%= render 'users/result' %>
+<div id="stock-info">
+  <%= render 'users/result' %> <!-- Render the stock result, if any -->
+</div>
