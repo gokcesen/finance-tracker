@@ -1,6 +1,6 @@
 <h1>My Portfolio</h1>
 
-<%= render 'shared/flash' %> <!-- Render flash messages -->
+<%= render 'shared/flash' %> 
 
 <div class="search-area" style="margin-bottom: 20px;">
   <h3>Search Stocks</h3>
@@ -20,7 +20,7 @@
   <%= render 'users/result' %> 
 </div>
 
-<% if !@tracked_stocks.empty? %>
+<% if @tracked_stocks.present? %>
   <%= render 'stocks/list' %>
 <% end %>
 
