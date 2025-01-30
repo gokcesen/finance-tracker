@@ -5,7 +5,11 @@
     <strong>Price: </strong> <%= @stock.last_price %>
   </div>
 <% else %>
-  <div class="alert alert-warning">
-    No stock information available.
+  <div class="row">
+    <div class="col-9">
+      <div class="alert alert-warning">
+        No stock information available.
+      </div>
+    </div>
   </div>
 <% end %>

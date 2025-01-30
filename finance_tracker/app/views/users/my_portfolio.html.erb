@@ -2,7 +2,7 @@
 
 <%= render 'shared/flash' %> <!-- Render flash messages -->
 
-<div class="search-area">
+<div class="search-area" style="margin-bottom: 20px;">
   <h3>Search Stocks</h3>
   <%= form_tag search_stock_path, remote: true, method: :get, data: { turbolinks: false } do %>
     <div class="form-group row">
@@ -17,5 +17,11 @@
 </div>
 
 <div id="stock-info">
-  <%= render 'users/result' %> <!-- Render the stock result, if any -->
+  <%= render 'users/result' %> 
 </div>
+
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% end %>
+
+
