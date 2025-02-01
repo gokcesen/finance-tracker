@@ -11,6 +11,17 @@
           <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
         </div>
 
+        <div class="form-row">
+          <div class="form-group col-md-6 pe-md-4">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name', class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6 ps-md-4">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, autofocus: true, autocomplete: 'last name', class: 'form-control' %>
+          </div>
+        </div>
+
         <div class="form-group">
           <%= f.label :password %>
           <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
@@ -20,7 +31,7 @@
           <% end %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
           <%= f.label :password_confirmation %>
           <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
         </div>
