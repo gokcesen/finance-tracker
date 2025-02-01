@@ -16,12 +16,10 @@
   <% end %>
 </div>
 
-<!-- Results Area -->
 <div id="results" class="mb-4">
   <%= render 'users/result' %> 
 </div>
 
-<!-- Tracked Stocks Area -->
 <div id="tracked_stocks">
   <% if !@tracked_stocks.nil? %>
     <%= render 'stocks/list' %>

@@ -20,7 +20,20 @@ class Stock < ApplicationRecord
     else
       stock = Stock.new
       stock.ticker = ticker_symbol
-      stock.name = ticker_symbol 
+      
+     
+      name_url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=#{ticker_symbol}&apikey=#{api_key}"
+      name_uri = URI(name_url)
+      name_response = Net::HTTP.get(name_uri)
+      name_result = JSON.parse(name_response)
+
+      if name_result["bestMatches"].present?
+        company_name = name_result["bestMatches"].first["2. name"]
+        stock.name = company_name.sub(/(\.com|\.net|\.org|\.co|\.io)$/i, '')
+      else
+        stock.name = ticker_symbol 
+      end
+
       stock.last_price = result["Global Quote"]["05. price"].to_f
       return stock
     end
@@ -32,7 +45,7 @@ class Stock < ApplicationRecord
   def self.check_db(ticker_symbol)
     where(ticker: ticker_symbol).first
   end
-
 end
+
 
 

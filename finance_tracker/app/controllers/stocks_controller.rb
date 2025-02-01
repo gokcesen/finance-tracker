@@ -3,7 +3,6 @@ class StocksController < ApplicationController
     if params[:stock].present?
       @stock = Stock.new_lookup(params[:stock])
       
-      # Yeni: @tracked_stocks'u güncelle
       @tracked_stocks = current_user.stocks
 
       respond_to do |format|
