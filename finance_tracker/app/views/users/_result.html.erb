@@ -1,11 +1,18 @@
 <% if @stock %>
-  <div class="card card-header results-block">
-    <strong>Symbol: </strong> <%= @stock.ticker %>
-    <strong>Name: </strong> <%= @stock.name %>
-    <strong>Price: </strong> <%= @stock.last_price %>
-    <%= form_with url: user_stocks_path(user: current_user, ticker: @stock.ticker), method: :post, local: false do |form| %>
-      <%= form.submit 'Add to portfolio', class: 'btn btn-xs btn-success' %>
-    <% end %>
+  <div class="card card-header results-block w-50" style="width: 700px; margin-left: 0;">
+    <div class="col-sm-9">
+      <strong>Symbol: </strong> <%= @stock.ticker %>
+      <strong>Name: </strong> <%= @stock.name %>
+      <strong>Price: </strong> <%= @stock.last_price %>
+
+      <% if current_user.can_track_stock?(@stock.ticker)%>
+        <%= form_with url: user_stocks_path(user: current_user, ticker: @stock.ticker), method: :post, remote: true do |form| %>
+        <%= form.submit 'Add to portfolio', class: 'btn btn-xs btn-success' %>
+      <% end %>
+      <% else %>
+        <%= render 'users/already_tracking', stock: @stock %>
+      <% end%>
+    </div>
   </div>
 <% else %>
   <div class="row">

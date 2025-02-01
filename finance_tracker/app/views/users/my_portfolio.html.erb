@@ -4,7 +4,7 @@
 
 <div class="search-area" style="margin-bottom: 20px;">
   <h3>Search Stocks</h3>
-  <%= form_tag search_stock_path, remote: true, method: :get, data: { turbolinks: false } do %>
+  <%= form_tag search_stock_path, remote: true, method: :get, data: { turbolinks: true } do %>
     <div class="form-group row">
       <div class="col-sm-9">
         <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true, class: "form-control form-control-lg" %>
@@ -16,12 +16,18 @@
   <% end %>
 </div>
 
-<div id="stock-info">
+<!-- Results Area -->
+<div id="results" class="mb-4">
   <%= render 'users/result' %> 
 </div>
 
-<% if @tracked_stocks.present? %>
-  <%= render 'stocks/list' %>
-<% end %>
+<!-- Tracked Stocks Area -->
+<div id="tracked_stocks">
+  <% if !@tracked_stocks.nil? %>
+    <%= render 'stocks/list' %>
+  <% else %>
+    <%= render 'stocks/empty_tracked_stocks' %>
+  <% end %>
+</div>
 
 
