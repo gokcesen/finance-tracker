@@ -1,10 +1,12 @@
 <h1>Friends</h1>
 
-<div class='search-area'>
+<%= render 'shared/flash' %> 
+
+<div class="search-area" style="margin-bottom: 20px;">
   <h3>Search Friends</h3>
-  <%= form_tag search_friend_path, remote: true, method: :get, data: { turbolinks: true } do %>
+  <%= form_tag search_friend_path, data: { turbo_stream: true }, method: :get do %>
     <div class="form-group row">
-      <div class="col-sm-9 no-right-padding">
+      <div class="col-sm-9">
         <%= text_field_tag :friend, params[:friend], placeholder: "Name or email", autofocus: true, class: "form-control form-control-lg" %>
       </div>
       <div class="col-sm-3">
@@ -12,6 +14,9 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div id="friend-results" class="mb-4">
 </div>
 
 <% if !@friends.empty? %>
